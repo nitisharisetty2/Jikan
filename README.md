@@ -29,3 +29,15 @@ Web Sync: Want to see more? Tapping the title takes you directly to the official
 
 Detail Caching: Once you view an anime, its synopsis and genres are saved locally for offline
 reading.
+
+Assumptions:
+Please check the code in the master branch
+
+User has internet on at least once before using the app
+
+Features Implemented:
+1. Anime Listing Screen
+2. Anime Detail Screen
+3. Inbuilt Youtube player
+4. Redirection to web if clicked on detail in Detail Screen.
+5. Room Database for local storage of both list and detail.
