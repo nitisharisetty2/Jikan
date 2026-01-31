@@ -119,7 +119,6 @@ class AnimeDetailFragment : Fragment(R.layout.fragment_anime_detail) {
                         is Result.Error -> {
                             loader.visibility = View.GONE
                             contentContainer.visibility = View.VISIBLE
-                            hideData()
                             Toast.makeText(
                                 requireContext(),
                                 result.message,
@@ -138,16 +137,28 @@ class AnimeDetailFragment : Fragment(R.layout.fragment_anime_detail) {
     }
 
 
-    fun hideData(){
-        genresText.visibility = View.GONE
-        synopsisText.visibility = View.GONE
-        genresTextTitle.visibility = View.GONE
-        synopsisTextTitle.visibility = View.GONE
-    }
     private fun bindDetailData(detail: AnimeDetail) {
 
         titleText.setOnClickListener {
             detail.url?.let { openInBrowser(it) }
+        }
+
+        if (detail.synopsis.isNullOrBlank()) {
+            synopsisText.visibility = View.GONE
+            synopsisTextTitle.visibility = View.GONE
+        } else {
+            synopsisText.visibility = View.VISIBLE
+            synopsisTextTitle.visibility = View.VISIBLE
+            synopsisText.text = detail.synopsis
+        }
+
+        if (detail.genres.isNullOrEmpty()) {
+            genresText.visibility = View.GONE
+            genresTextTitle.visibility = View.GONE
+        } else {
+            genresText.visibility = View.VISIBLE
+            genresTextTitle.visibility = View.VISIBLE
+            genresText.text = detail.genres.joinToString(", ") { it.name }
         }
 
         synopsisText.text =
