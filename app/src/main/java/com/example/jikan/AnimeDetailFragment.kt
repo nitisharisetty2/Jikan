@@ -89,12 +89,7 @@ class AnimeDetailFragment : Fragment(R.layout.fragment_anime_detail) {
         ratingText.text = "⭐ ${anime.rating ?: "N/A"}"
         episodesText.text = "Episodes: ${anime.numberOfEpisodes ?: "?"}"
 
-        if(!NetworkUtils.isInternetAvailable(requireContext())){
-            genresText.visibility = View.GONE
-            synopsisText.visibility = View.GONE
-            genresTextTitle.visibility = View.GONE
-            synopsisTextTitle.visibility = View.GONE
-        }
+
 
         Glide.with(this)
             .load(anime.images?.jpg?.imageUrl)
@@ -124,6 +119,7 @@ class AnimeDetailFragment : Fragment(R.layout.fragment_anime_detail) {
                         is Result.Error -> {
                             loader.visibility = View.GONE
                             contentContainer.visibility = View.VISIBLE
+                            hideData()
                             Toast.makeText(
                                 requireContext(),
                                 result.message,
@@ -142,6 +138,12 @@ class AnimeDetailFragment : Fragment(R.layout.fragment_anime_detail) {
     }
 
 
+    fun hideData(){
+        genresText.visibility = View.GONE
+        synopsisText.visibility = View.GONE
+        genresTextTitle.visibility = View.GONE
+        synopsisTextTitle.visibility = View.GONE
+    }
     private fun bindDetailData(detail: AnimeDetail) {
 
         titleText.setOnClickListener {
