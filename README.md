@@ -1,49 +1,56 @@
-📺 Jikan Anime Explorer
-A robust, offline-first Android application that brings the world of anime to your fingertips using
-the Jikan API (MyAnimeList).
+# Jikan Anime Explorer
 
+Android application using Jikan API 
+Offline-first anime browser with local caching.
 
-Reliability: The app shouldn't break just because the Wi-Fi does. I implemented a Room-based caching
-strategy so users can browse their favorite titles anytime.
+## Features Implemented
 
-Architecture -> MVVM
-Dependency Injection -> Hilt
-Local Storage -> Room Database
-API Integration -> Retrofit
-Data flow -> Flows
-Image Loading -> Glide
-Asynchronous tasks -> Coroutines
-
-
-Performance: By using StateFlow and Coroutines, the UI stays reactive and smooth, only updating when
-the data actually changes.
-
-🚀 Key Features
-🏠 Browse with Ease
-Anime List: Instantly see list of anime from the API.
-
-Smart Refresh: Pull-to-refresh resets the whole data base and updates it with the fresh data fetched from
-API.
-
-
-📄 Deep-Dive Details
-Trailer Integration: Integrated the Android YouTube Player to let users watch trailers directly
-in-app.
-
-Want to see more about the Anime? Tapping the title takes you directly to the official MyAnimeList page.
-
-Detail Caching: Once you view an anime, its synopsis and genres are saved locally for offline
-reading.
-
-Assumptions:
-Please check the code in the master branch
-
-User has internet on at least once before using the app
-
-Features Implemented:
 1. Anime Listing Screen
+    - Displays a list of anime fetched from the Jikan API
+    - Pull-to-refresh functionality to update the list with fresh data
+    - Basic loading and error states
+
 2. Anime Detail Screen
-3. Inbuilt Youtube player
-4. Redirection to web if clicked on detail in Detail Screen.
-5. Room Database for local storage of both list and detail.
-6. Once user refreshes the list screen any detail cached data is cleared and fresh data from server is inserted.
+    - Shows detailed information: title, synopsis, genres, score, etc.
+    - Embedded YouTube player for watching anime trailers directly in the app
+    - Button to redirect to the official MyAnimeList page in the browser
+
+3. Offline Support via Room Database
+    - Caches the anime list for offline browsing
+    - Caches individual anime details (synopsis, genres, etc.) once viewed
+    - Data remains available offline after at least one successful online fetch
+
+4. Data Refresh Behavior
+    - Pull-to-refresh on the listing screen clears all cached data (both list and details)
+    - Fetches fresh data from the API and repopulates the database
+
+5. Modern Android Tech Stack
+    - Architecture: MVVM
+    - Dependency Injection: Hilt
+    - Networking: Retrofit
+    - Data flow: Kotlin Flows / StateFlow
+    - Image loading: Glide
+    - Asynchronous operations: Coroutines
+    - Local persistence: Room
+
+## Assumptions Made
+
+- The user has an internet connection at least once after installing the app (to populate the
+  initial cache).
+- After the first successful fetch, the app can be used mostly offline (list + viewed details).
+- YouTube trailer URLs provided by the API are valid and playable.
+- Basic error handling is sufficient (network errors show a message; no advanced retry mechanisms).
+
+## Known Limitations
+
+- No pagination / infinite scrolling — only the initial/top anime list is fetched.
+- No search functionality for finding specific anime titles.
+- No sorting or filtering options on the anime list (e.g., by score, genre, season).
+- Cached data is fully cleared on every pull-to-refresh (no smart/partial refresh).
+- No dark mode support.
+- Limited error recovery — if the API is down after initial cache, offline mode still works but
+  fresh data cannot be obtained.
+- Trailer playback works only if the URL works.
+
+This project demonstrates core modern Android development practices with a focus on offline-first
+design using Room caching, MVVM, Hilt, Retrofit, Coroutines, and Flows.
