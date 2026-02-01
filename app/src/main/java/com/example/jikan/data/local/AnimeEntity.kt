@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.jikan.model.AnimeData
+import com.example.jikan.model.AnimeDetail
 import com.example.jikan.model.Genre
 import com.example.jikan.model.Images
 import com.example.jikan.model.Jpg
@@ -16,16 +17,12 @@ data class AnimeEntity(
     val id: Int,
 
     val title: String,
-
     val episodes: Int,
-
     val rating: Double,
-
     val imageUrl: String,
-    val synopsis: String?,
 
-    val genres: String?
-
+    val synopsis: String? = null,
+    val genres: String? = null
 )
 
 fun AnimeData.toEntity(): AnimeEntity {
@@ -34,9 +31,7 @@ fun AnimeData.toEntity(): AnimeEntity {
         title = title ?: "",
         episodes = numberOfEpisodes ?: 0,
         rating = rating ?: 0.0,
-        imageUrl = images?.jpg?.smallImageUrl ?: "",
-        synopsis = null,
-        genres = null
+        imageUrl = images?.jpg?.smallImageUrl ?: ""
     )
 }
 
@@ -64,8 +59,8 @@ fun AnimeEntity.updateWithDetail(
     )
 }
 
-fun AnimeEntity.toAnimeDetail(): com.example.jikan.model.AnimeDetail {
-    return com.example.jikan.model.AnimeDetail(
+fun AnimeEntity.toAnimeDetail(): AnimeDetail {
+    return AnimeDetail(
         id = id,
         synopsis = synopsis,
         genres = genres

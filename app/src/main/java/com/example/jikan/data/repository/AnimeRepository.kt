@@ -20,7 +20,6 @@ class AnimeRepository @Inject constructor(
     private val context: Context
 ) {
 
-
     fun getTopAnime(): Flow<Result<Anime>> = flow {
         emit(Result.Loading)
 
@@ -29,7 +28,10 @@ class AnimeRepository @Inject constructor(
                 val response = apiService.getTopAnime()
 
                 animeDao.clearAll()
-                animeDao.insertAnime(response.data.map { it.toEntity() })
+
+                animeDao.insertAnimeList(
+                    response.data.map { it.toEntity() }
+                )
 
                 emit(Result.Success(response))
             } catch (e: Exception) {
@@ -48,7 +50,6 @@ class AnimeRepository @Inject constructor(
             }
         }
     }
-
 
     fun getAnimeDetail(id: Int): Flow<Result<AnimeDetail>> = flow {
         emit(Result.Loading)

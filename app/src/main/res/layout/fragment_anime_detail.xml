@@ -78,11 +78,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/genresTextTitle"
                     android:text="Genres"
                     android:layout_marginTop="16dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:id="@+id/genresTextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -94,11 +94,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/synopsisTextTitle"
                     android:text="Synopsis"
                     android:layout_marginTop="16dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:id="@+id/synopsisTextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -106,6 +106,18 @@
                     android:id="@+id/synopsisText"
                     android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!-- OFFLINE MESSAGE -->
+                <TextView
+                    android:id="@+id/noDetailMessage"
+                    android:layout_marginTop="24dp"
+                    android:text="Please turn on your internet to view genre and synopsis"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

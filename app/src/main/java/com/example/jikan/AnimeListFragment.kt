@@ -33,6 +33,7 @@ class AnimeListFragment : Fragment(R.layout.fragment_anime_list) {
 
 
     private val viewModel: AnimeListViewModel by viewModels()
+    private var firstTime = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +44,10 @@ class AnimeListFragment : Fragment(R.layout.fragment_anime_list) {
         swipeRefresh = view.findViewById(R.id.swipeRefresh)
 
 
+        if(firstTime){
+            viewModel.fetchAnimeList()
+            firstTime = false
+        }
         adapter = AnimeAdapter { anime ->
             parentFragmentManager.beginTransaction()
                 .replace(R.id.container, AnimeDetailFragment.newInstance(anime))

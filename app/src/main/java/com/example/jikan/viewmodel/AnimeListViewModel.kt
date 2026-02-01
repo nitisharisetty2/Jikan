@@ -29,9 +29,6 @@ class AnimeListViewModel @Inject constructor(
         MutableStateFlow<Result<AnimeDetail>>(Result.Loading)
     val animeDetailState: StateFlow<Result<AnimeDetail>> = _animeDetailState
 
-    init {
-        fetchAnimeList()
-    }
 
     fun fetchAnimeList() {
         viewModelScope.launch {
